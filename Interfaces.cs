@@ -3,23 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Gamificacao3;
 
 // Interface de repositório
-/*
-public interface IPedidoRepository
+namespace Gamificacao3
 {
-    void Inserir(Pedido pedido);
-    void Atualizar(Pedido pedido);
-    void Excluir(int id);
-    List<Pedido> ListarPorCliente(string cliente);
-    List<Pedido> ListarPorStatus(string status);
-    List<Pedido> ListarPorData(DateTime data);
-}
+    /*
+    public interface IPedidoRepository
+    {
+        void Inserir(Pedido pedido);
+        void Atualizar(Pedido pedido);
+        void Excluir(int id);
+        List<Pedido> ListarPorCliente(string cliente);
+        List<Pedido> ListarPorStatus(string status);
+        List<Pedido> ListarPorData(DateTime data);
+    }
 
-public interface IItemPedidoRepository
-{
-    void Inserir(ItemPedido itemPedido);
-    void Atualizar(ItemPedido itemPedido);
-    void Excluir(int id);
+    public interface IItemPedidoRepository
+    {
+        void Inserir(ItemPedido itemPedido);
+        void Atualizar(ItemPedido itemPedido);
+        void Excluir(int id);
+    }
+    */
 }
-*/
