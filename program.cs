@@ -4,6 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+// Entidades
+
+
+// Implementação do repositório utilizando ADO.NET
 
 /*
 Desafio de e-commerce de pedidos
@@ -63,4 +67,3 @@ namespace Gamificacao3
         }
     }
 }
-
