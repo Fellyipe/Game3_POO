@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public class Pedido
+/*public class Pedido
 {
     public int Id { get; set; }
     public DateTime Data { get; set; }
@@ -20,4 +20,4 @@ public class ItemPedido
     public int Quantidade { get; set; }
     public decimal PrecoUnitario { get; set; }
     public Pedido Pedido { get; set; }
-}
+}*/

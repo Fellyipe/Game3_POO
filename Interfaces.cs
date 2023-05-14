@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 // Interface de repositório
+/*
 public interface IPedidoRepository
 {
     void Inserir(Pedido pedido);
@@ -21,3 +22,4 @@ public interface IItemPedidoRepository
     void Atualizar(ItemPedido itemPedido);
     void Excluir(int id);
 }
+*/
