@@ -17,6 +17,19 @@ namespace Gamificacao3
 
         public int Id{
             get { return _id; }
+            set { _id = value;}
+        }
+        public string Nome{
+            get { return _nome; }
+        }
+        public string Descricao{
+            get { return _descricao; }
+        }
+        public decimal Preco{
+            get { return _preco; }
+        }
+        public int QuantidadeEmEstoque{
+            get { return _quantidadeEmEstoque; }
         }
 
         public Produto(int id, string nome, string descricao, decimal preco, int quantidadeEmEstoque)
