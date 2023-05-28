@@ -5,17 +5,17 @@ namespace Gamificacao3
     public class ItemPedido
     {
         private int _id;
-        private Produto _produto;
+        private Produto? _produto;
         private int _quantidade;
         private decimal _precoUnitario;
-        private Pedido _pedido;
+        private Pedido? _pedido;
 
         public int Id{
             get { return _id; }
             set { _id = value; }
         }
 
-        public Produto Produto{
+        public Produto? Produto{
             get { return _produto; }
         }
 
@@ -26,11 +26,11 @@ namespace Gamificacao3
             get { return _precoUnitario; }
         }
 
-        public Pedido Pedido{
+        public Pedido? Pedido{
             get { return _pedido; }
         }
 
-        public ItemPedido(int id, Produto produto, int quantidade, decimal precoUnitario, Pedido pedido)
+        public ItemPedido(int id, Produto? produto, int quantidade, decimal precoUnitario, Pedido? pedido)
         {
             _id = id;
             _produto = produto;

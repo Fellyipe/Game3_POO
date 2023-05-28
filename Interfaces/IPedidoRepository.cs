@@ -8,7 +8,7 @@ namespace Gamificacao3.Interfaces
 {
     public interface IPedidoRepository
     {
-        Pedido GetById(int id);
+        Pedido? GetById(int id);
         void Create(Pedido pedido);
         void Update(Pedido pedido);
         void Delete(int id);

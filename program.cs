@@ -69,13 +69,7 @@ namespace Gamificacao3
     {
         public static void Main(string[] args)
         {
-            string servidor = "localhost";
-            string base_de_dados = "poo_game3";
-            string usuario = "root";
-            string senha = ""; // senha vazia
-        
-            string connectionString = $"server={servidor};database={base_de_dados};user={usuario};password={senha};";
-
+            string connectionString = "server=localhost;database=poo_game3;user=root;password=;";
             
             MySqlConnection connection = new MySqlConnection(connectionString);
 
@@ -101,35 +95,43 @@ namespace Gamificacao3
                 }
 
                 
-                /*
                 var pedidoRepository = new PedidoRepository(connectionString);
                 var itemPedidoRepository = new ItemPedidoRepository(connectionString);
-
+                var produtoRepository = new ProdutoRepository(connectionString);
                 var gerenciamentoDePedidos = new GerenciamentoDePedidos(pedidoRepository, itemPedidoRepository);
+                
+                // Criação de um novo produto
+                var produto1 = new Produto(0, "Notebook", "Notebook de última geração", 2500.00m, 10);
+
+                // Chamada do método para criar o produto no banco de dados
+                produtoRepository.Create(produto1);
 
                 // Criar um novo pedido
-                var cliente1 = new Cliente("João");
-                gerenciamentoDePedidos.CriarPedido(DateTime.Now, cliente1, "Pendente");
-
+                var cliente1 = new Cliente("Tadeu");
+                var pedido1 = gerenciamentoDePedidos.CriarPedido(DateTime.Now, cliente1, "Pendente");
+                
                 // Adicionar itens a um pedido
-                gerenciamentoDePedidos.AdicionarItemPedido(1, 1, 2, 10.99m);
-                gerenciamentoDePedidos.AdicionarItemPedido(1, 2, 1, 20.99m);
+                gerenciamentoDePedidos.AdicionarItemPedido(pedido1.Id, produto1.Id, 2, produto1.Preco);
 
+
+                /*
+                gerenciamentoDePedidos.AdicionarItemPedido(1, 2, 1, 20.99m);
+                
                 // Atualizar o status de um pedido
                 gerenciamentoDePedidos.AtualizarStatusPedido(1, "Pago");
-
+                
                 // Remover um pedido
                 gerenciamentoDePedidos.RemoverPedido(1);
-
+                
                 // Listar pedidos por cliente, status ou data
                 var pedidosCliente = gerenciamentoDePedidos.ListarPedidosPorCliente(cliente1);
                 var pedidosStatus = gerenciamentoDePedidos.ListarPedidosPorStatus("Pendente");
                 var pedidosData = gerenciamentoDePedidos.ListarPedidosPorData(DateTime.Now);
-
+                
                 // Calcular o valor total de um pedido
                 var valorTotalPedido = gerenciamentoDePedidos.CalcularValorTotalPedido(1);
-                            
                 */
+                
                 
                 connection.Close();
                 Console.WriteLine("Conexão com o banco de dados encerrada.");                

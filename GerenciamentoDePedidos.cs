@@ -12,16 +12,18 @@ public class GerenciamentoDePedidos
         this.itemPedidoRepository = itemPedidoRepository;
     }
 
-    public void CriarPedido(DateTime Data, Cliente cliente, string status)
+    public Pedido CriarPedido(DateTime Data, Cliente cliente, string status)
     {
         var pedido = new Pedido(0, Data, cliente, status);
         pedidoRepository.Create(pedido);
+        return pedido;
     }
 
     public void AdicionarItemPedido(int pedidoId, int produtoId, int quantidade, decimal precoUnitario)
     {
         var pedido = pedidoRepository.GetById(pedidoId);
-        var produtoRepository = new ProdutoRepository("your_connection_string");
+        Console.WriteLine("pedidoClienteNome: " + pedido?.Cliente?.Nome + "; produtoId: " + produtoId);
+        var produtoRepository = new ProdutoRepository("server=localhost;database=poo_game3;user=root;password=;");
         var produto = produtoRepository.GetById(produtoId);
 
         if (pedido != null && produto != null)

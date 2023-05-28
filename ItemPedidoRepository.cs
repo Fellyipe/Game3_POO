@@ -12,7 +12,7 @@ public class ItemPedidoRepository : IItemPedidoRepository
         this.connectionString = connectionString;
     }
 
-    public ItemPedido GetById(int id)
+    public ItemPedido? GetById(int id)
     {
         using (var connection = new MySqlConnection(connectionString))
         {
@@ -50,13 +50,13 @@ public class ItemPedidoRepository : IItemPedidoRepository
         using (var connection = new MySqlConnection(connectionString))
         {
             connection.Open();
-            var query = "INSERT INTO tb_itempedido (tb_produtoId, Quantidade, PrecoUnitario, tb_pedidoId) VALUES (@tb_produtoId, @Quantidade, @PrecoUnitario, @tb_pedidoId); SELECT SCOPE_IDENTITY();";
+            var query = "INSERT INTO tb_itempedido (tb_produtoId, Quantidade, PrecoUnitario, tb_pedidoId) VALUES (@tb_produtoId, @Quantidade, @PrecoUnitario, @tb_pedidoId); SELECT LAST_INSERT_ID();";
             using (var command = new MySqlCommand(query, connection))
             {
-                command.Parameters.AddWithValue("@tb_produtoId", itemPedido.Produto.Id);
-                command.Parameters.AddWithValue("@Quantidade", itemPedido.Quantidade);
-                command.Parameters.AddWithValue("@PrecoUnitario", itemPedido.PrecoUnitario);
-                command.Parameters.AddWithValue("@tb_pedidoId", itemPedido.Pedido.Id);
+                command.Parameters.AddWithValue("@tb_produtoId", itemPedido?.Produto?.Id);
+                command.Parameters.AddWithValue("@Quantidade", itemPedido?.Quantidade);
+                command.Parameters.AddWithValue("@PrecoUnitario", itemPedido?.PrecoUnitario);
+                command.Parameters.AddWithValue("@tb_pedidoId", itemPedido?.Pedido?.Id);
 
                 itemPedido.Id = Convert.ToInt32(command.ExecuteScalar());
             }
@@ -71,11 +71,11 @@ public class ItemPedidoRepository : IItemPedidoRepository
             var query = "UPDATE tb_itempedido SET tb_produtoId = @tb_produtoId, Quantidade = @Quantidade, PrecoUnitario = @PrecoUnitario, tb_pedidoId = @tb_pedidoId WHERE Id = @Id";
             using (var command = new MySqlCommand(query, connection))
             {
-                command.Parameters.AddWithValue("@tb_produtoId", itemPedido.Produto.Id);
-                command.Parameters.AddWithValue("@Quantidade", itemPedido.Quantidade);
-                command.Parameters.AddWithValue("@PrecoUnitario", itemPedido.PrecoUnitario);
-                command.Parameters.AddWithValue("@tb_pedidoId", itemPedido.Pedido.Id);
-                command.Parameters.AddWithValue("@Id", itemPedido.Id);
+                command.Parameters.AddWithValue("@tb_produtoId", itemPedido?.Produto?.Id);
+                command.Parameters.AddWithValue("@Quantidade", itemPedido?.Quantidade);
+                command.Parameters.AddWithValue("@PrecoUnitario", itemPedido?.PrecoUnitario);
+                command.Parameters.AddWithValue("@tb_pedidoId", itemPedido?.Pedido?.Id);
+                command.Parameters.AddWithValue("@Id", itemPedido?.Id);
 
                 command.ExecuteNonQuery();
             }

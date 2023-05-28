@@ -12,29 +12,28 @@ public class PedidoRepository : IPedidoRepository
         this.connectionString = connectionString;
     }
 
-    public Pedido GetById(int id)
+    public Pedido? GetById(int id)
     {
-        using (var connection = new MySqlConnection(connectionString))
+        var connection = new MySqlConnection(connectionString);
+        
+        connection.Open();
+        var query = "SELECT * FROM tb_pedido WHERE Id = @Id";
+        var command = new MySqlCommand(query, connection);
+            
+        command.Parameters.AddWithValue("@Id", id);
+        var reader = command.ExecuteReader();
+                
+        if (reader.Read())
         {
-            connection.Open();
-            var query = "SELECT * FROM tb_pedido WHERE Id = @Id";
-            using (var command = new MySqlCommand(query, connection))
-            {
-                command.Parameters.AddWithValue("@Id", id);
-                using (var reader = command.ExecuteReader())
-                {
-                    if (reader.Read())
-                    {
-                        var pedidoId = reader.GetInt32(0);
-                        var Data = reader.GetDateTime(1);
-                        var cliente = new Cliente(reader.GetString(2));
-                        var status = reader.GetString(3);
+            var pedidoId = reader.GetInt32(0);
+            var Data = reader.GetDateTime(1);
+            var cliente = new Cliente(reader.GetString(2));
+            var status = reader.GetString(3);
 
-                        return new Pedido(pedidoId, Data, cliente, status);
-                    }
-                }
-            }
+            return new Pedido(pedidoId, Data, cliente, status);
         }
+                
+            
         return null;
     }
 
@@ -43,7 +42,8 @@ public class PedidoRepository : IPedidoRepository
         using (var connection = new MySqlConnection(connectionString))
         {
             connection.Open();
-            var query = "INSERT INTO tb_pedido (Data, Cliente, Status) VALUES (@Data, @Cliente, @Status); SELECT LAST_INSERT_ID();";
+            var query = "INSERT INTO tb_pedido (Data, Cliente, Status) " +
+                        "VALUES (@Data, @Cliente, @Status); SELECT LAST_INSERT_ID();";
             using (var command = new MySqlCommand(query, connection))
             {
                 command.Parameters.AddWithValue("@Data", pedido.Data);
