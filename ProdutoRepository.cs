@@ -17,7 +17,7 @@ public class ProdutoRepository
         using (var connection = new MySqlConnection(connectionString))
         {
             connection.Open();
-            var query = "SELECT * FROM Produtos WHERE Id = @Id";
+            var query = "SELECT * FROM tb_produto WHERE Id = @Id";
             using (var command = new MySqlCommand(query, connection))
             {
                 command.Parameters.AddWithValue("@Id", id);

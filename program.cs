@@ -69,39 +69,76 @@ namespace Gamificacao3
     {
         public static void Main(string[] args)
         {
+            string servidor = "localhost";
+            string base_de_dados = "poo_game3";
+            string usuario = "root";
+            string senha = ""; // senha vazia
+        
+            string connectionString = $"server={servidor};database={base_de_dados};user={usuario};password={senha};";
 
+            
+            MySqlConnection connection = new MySqlConnection(connectionString);
 
-            string connectionString = "server=localhost;database=poo_game3;user=root;password=;";
-
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            try
             {
-                try
-                {
-                    connection.Open();
-                    Console.WriteLine("Conexão com o banco de dados estabelecida com sucesso.");
+                connection.Open();
+                Console.WriteLine("Conexão com o banco de dados estabelecida com sucesso.");
 
-                    // Realize as operações desejadas no banco de dados aqui
+                // Realize as operações desejadas no banco de dados aqui
 
-                    connection.Close();
-                    Console.WriteLine("Conexão com o banco de dados encerrada.");
-                }
-                catch (Exception ex)
+                Console.WriteLine("Hello World!");
+
+                string query = "SELECT SYSDATE() AS SYSDATE";
+                MySqlCommand comando = new MySqlCommand(query, connection);
+
+                using (MySqlDataReader reader = comando.ExecuteReader())
                 {
-                    Console.WriteLine("Erro ao conectar ao banco de dados: " + ex.Message);
+                    if (reader.Read())
+                    {
+                        DateTime sysDate = reader.GetDateTime("SYSDATE");
+                        Console.WriteLine(sysDate);
+                    }
                 }
+
+                
+                /*
+                var pedidoRepository = new PedidoRepository(connectionString);
+                var itemPedidoRepository = new ItemPedidoRepository(connectionString);
+
+                var gerenciamentoDePedidos = new GerenciamentoDePedidos(pedidoRepository, itemPedidoRepository);
+
+                // Criar um novo pedido
+                var cliente1 = new Cliente("João");
+                gerenciamentoDePedidos.CriarPedido(DateTime.Now, cliente1, "Pendente");
+
+                // Adicionar itens a um pedido
+                gerenciamentoDePedidos.AdicionarItemPedido(1, 1, 2, 10.99m);
+                gerenciamentoDePedidos.AdicionarItemPedido(1, 2, 1, 20.99m);
+
+                // Atualizar o status de um pedido
+                gerenciamentoDePedidos.AtualizarStatusPedido(1, "Pago");
+
+                // Remover um pedido
+                gerenciamentoDePedidos.RemoverPedido(1);
+
+                // Listar pedidos por cliente, status ou data
+                var pedidosCliente = gerenciamentoDePedidos.ListarPedidosPorCliente(cliente1);
+                var pedidosStatus = gerenciamentoDePedidos.ListarPedidosPorStatus("Pendente");
+                var pedidosData = gerenciamentoDePedidos.ListarPedidosPorData(DateTime.Now);
+
+                // Calcular o valor total de um pedido
+                var valorTotalPedido = gerenciamentoDePedidos.CalcularValorTotalPedido(1);
+                            
+                */
+                
+                connection.Close();
+                Console.WriteLine("Conexão com o banco de dados encerrada.");                
+                
             }
-
-
-
-
-
-
-
-
-
-
-
-            Console.WriteLine("Hello World!");
+            catch (Exception ex)
+            {
+                Console.WriteLine("Erro ao conectar ao banco de dados: " + ex.Message);
+            }
         }
     }
 }

@@ -17,7 +17,7 @@ public class PedidoRepository : IPedidoRepository
         using (var connection = new MySqlConnection(connectionString))
         {
             connection.Open();
-            var query = "SELECT * FROM Pedidos WHERE Id = @Id";
+            var query = "SELECT * FROM tb_pedido WHERE Id = @Id";
             using (var command = new MySqlCommand(query, connection))
             {
                 command.Parameters.AddWithValue("@Id", id);
@@ -43,11 +43,11 @@ public class PedidoRepository : IPedidoRepository
         using (var connection = new MySqlConnection(connectionString))
         {
             connection.Open();
-            var query = "INSERT INTO Pedidos (Data, Cliente, Status) VALUES (@Data, @Cliente, @Status); SELECT SCOPE_IDENTITY();";
+            var query = "INSERT INTO tb_pedido (Data, Cliente, Status) VALUES (@Data, @Cliente, @Status); SELECT LAST_INSERT_ID();";
             using (var command = new MySqlCommand(query, connection))
             {
                 command.Parameters.AddWithValue("@Data", pedido.Data);
-                command.Parameters.AddWithValue("@Cliente", pedido.Cliente);
+                command.Parameters.AddWithValue("@Cliente", pedido.Cliente.Nome);
                 command.Parameters.AddWithValue("@Status", pedido.Status);
 
                 pedido.Id = Convert.ToInt32(command.ExecuteScalar());
@@ -60,11 +60,11 @@ public class PedidoRepository : IPedidoRepository
         using (var connection = new MySqlConnection(connectionString))
         {
             connection.Open();
-            var query = "UPDATE Pedidos SET Data = @Data, Cliente = @Cliente, Status = @Status WHERE Id = @Id";
+            var query = "UPDATE tb_pedido SET Data = @Data, Cliente = @Cliente, Status = @Status WHERE Id = @Id";
             using (var command = new MySqlCommand(query, connection))
             {
                 command.Parameters.AddWithValue("@Data", pedido.Data);
-                command.Parameters.AddWithValue("@Cliente", pedido.Cliente);
+                command.Parameters.AddWithValue("@Cliente", pedido.Cliente.Nome);
                 command.Parameters.AddWithValue("@Status", pedido.Status);
                 command.Parameters.AddWithValue("@Id", pedido.Id);
 
@@ -78,7 +78,7 @@ public class PedidoRepository : IPedidoRepository
         using (var connection = new MySqlConnection(connectionString))
         {
             connection.Open();
-            var query = "DELETE FROM Pedidos WHERE Id = @Id";
+            var query = "DELETE FROM tb_pedido WHERE Id = @Id";
             using (var command = new MySqlCommand(query, connection))
             {
                 command.Parameters.AddWithValue("@Id", id);
@@ -93,7 +93,7 @@ public class PedidoRepository : IPedidoRepository
         using (var connection = new MySqlConnection(connectionString))
         {
             connection.Open();
-            var query = "SELECT * FROM Pedidos WHERE Cliente = @Cliente";
+            var query = "SELECT * FROM tb_pedido WHERE Cliente = @Cliente";
             using (var command = new MySqlCommand(query, connection))
             {
                 command.Parameters.AddWithValue("@Cliente", cliente);
@@ -119,7 +119,7 @@ public class PedidoRepository : IPedidoRepository
         using (var connection = new MySqlConnection(connectionString))
         {
             connection.Open();
-            var query = "SELECT * FROM Pedidos WHERE Status = @Status";
+            var query = "SELECT * FROM tb_pedido WHERE Status = @Status";
             using (var command = new MySqlCommand(query, connection))
             {
                 command.Parameters.AddWithValue("@Status", status);
@@ -145,7 +145,7 @@ public class PedidoRepository : IPedidoRepository
         using (var connection = new MySqlConnection(connectionString))
         {
             connection.Open();
-            var query = "SELECT * FROM Pedidos WHERE Data = @Data";
+            var query = "SELECT * FROM tb_pedido WHERE Data = @Data";
             using (var command = new MySqlCommand(query, connection))
             {
                 command.Parameters.AddWithValue("@Data", data);
