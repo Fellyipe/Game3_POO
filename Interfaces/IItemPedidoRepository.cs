@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace Gamificacao3.Interfaces
 {
-    public interface IPedidoRepository
+    public interface IItemPedidoRepository
     {
-        Pedido CreatePedido(Pedido pedido);
-        Pedido GetPedido(int id);
-        Pedido UpdatePedido(Pedido pedido);
-        void DeletePedido(int id);
-        IEnumerable<Pedido> GetPedidos(Func<Pedido, bool> predicate);
+        ItemPedido GetById(int id);
+        void Create(ItemPedido itemPedido);
+        void Update(ItemPedido itemPedido);
+        void Delete(int id);
     }
 }
