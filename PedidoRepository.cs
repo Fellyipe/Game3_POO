@@ -46,11 +46,15 @@ public class PedidoRepository : IPedidoRepository
                         "VALUES (@Data, @Cliente, @Status); SELECT LAST_INSERT_ID();";
             using (var command = new MySqlCommand(query, connection))
             {
-                command.Parameters.AddWithValue("@Data", pedido.Data);
-                command.Parameters.AddWithValue("@Cliente", pedido.Cliente.Nome);
-                command.Parameters.AddWithValue("@Status", pedido.Status);
+                command.Parameters.AddWithValue("@Data", pedido?.Data);
+                command.Parameters.AddWithValue("@Cliente", pedido?.Cliente?.Nome);
+                command.Parameters.AddWithValue("@Status", pedido?.Status);
 
-                pedido.Id = Convert.ToInt32(command.ExecuteScalar());
+
+                if (pedido != null)
+                {
+                    pedido.Id = Convert.ToInt32(command.ExecuteScalar());
+                }
             }
         }
     }
@@ -63,10 +67,10 @@ public class PedidoRepository : IPedidoRepository
             var query = "UPDATE tb_pedido SET Data = @Data, Cliente = @Cliente, Status = @Status WHERE Id = @Id";
             using (var command = new MySqlCommand(query, connection))
             {
-                command.Parameters.AddWithValue("@Data", pedido.Data);
-                command.Parameters.AddWithValue("@Cliente", pedido.Cliente.Nome);
-                command.Parameters.AddWithValue("@Status", pedido.Status);
-                command.Parameters.AddWithValue("@Id", pedido.Id);
+                command.Parameters.AddWithValue("@Data", pedido?.Data);
+                command.Parameters.AddWithValue("@Cliente", pedido?.Cliente?.Nome);
+                command.Parameters.AddWithValue("@Status", pedido?.Status);
+                command.Parameters.AddWithValue("@Id", pedido?.Id);
 
                 command.ExecuteNonQuery();
             }

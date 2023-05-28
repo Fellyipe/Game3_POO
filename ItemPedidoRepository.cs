@@ -58,7 +58,10 @@ public class ItemPedidoRepository : IItemPedidoRepository
                 command.Parameters.AddWithValue("@PrecoUnitario", itemPedido?.PrecoUnitario);
                 command.Parameters.AddWithValue("@tb_pedidoId", itemPedido?.Pedido?.Id);
 
-                itemPedido.Id = Convert.ToInt32(command.ExecuteScalar());
+                if (itemPedido != null)
+                {
+                    itemPedido.Id = Convert.ToInt32(command.ExecuteScalar());
+                }
             }
         }
     }
