@@ -14,6 +14,11 @@ namespace Gamificacao3
         private string _descricao;
         private decimal _preco;
         private int _quantidadeEmEstoque;
+
+        public int Id{
+            get { return _id; }
+        }
+
         public Produto(int id, string nome, string descricao, decimal preco, int quantidadeEmEstoque)
         {
             if (string.IsNullOrWhiteSpace(nome))

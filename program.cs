@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
+using MySql.Data;
+using MySql.Data.MySqlClient;
 
 // Entidades
 
@@ -58,6 +60,7 @@ GUILHERME FAVERO
 FELIPE BUENO
 */
 using Gamificacao3;
+using Gamificacao3.Interfaces;
 
 
 namespace Gamificacao3
@@ -66,6 +69,38 @@ namespace Gamificacao3
     {
         public static void Main(string[] args)
         {
+
+
+            string connectionString = "server=localhost;database=nome_do_banco_de_dados;user=root;password=senha;";
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+                    Console.WriteLine("Conexão com o banco de dados estabelecida com sucesso.");
+
+                    // Realize as operações desejadas no banco de dados aqui
+
+                    connection.Close();
+                    Console.WriteLine("Conexão com o banco de dados encerrada.");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Erro ao conectar ao banco de dados: " + ex.Message);
+                }
+            }
+
+
+
+
+
+
+
+
+
+
+
             Console.WriteLine("Hello World!");
         }
     }

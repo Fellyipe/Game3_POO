@@ -1,3 +1,8 @@
+using Gamificacao3;
+using Gamificacao3.Interfaces;
+using MySql.Data;
+using MySql.Data.MySqlClient;
+
 public class ProdutoRepository
 {
     private readonly string connectionString;
@@ -9,11 +14,11 @@ public class ProdutoRepository
 
     public Produto GetById(int id)
     {
-        using (var connection = new SqlConnection(connectionString))
+        using (var connection = new MySqlConnection(connectionString))
         {
             connection.Open();
             var query = "SELECT * FROM Produtos WHERE Id = @Id";
-            using (var command = new SqlCommand(query, connection))
+            using (var command = new MySqlCommand(query, connection))
             {
                 command.Parameters.AddWithValue("@Id", id);
                 using (var reader = command.ExecuteReader())

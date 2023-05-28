@@ -1,6 +1,5 @@
 using Gamificacao3;
 using Gamificacao3.Interfaces;
-
     
 public class GerenciamentoDePedidos
 {
@@ -13,7 +12,7 @@ public class GerenciamentoDePedidos
         this.itemPedidoRepository = itemPedidoRepository;
     }
 
-    public void CriarPedido(DateTime Data, string cliente, string status)
+    public void CriarPedido(DateTime Data, Cliente cliente, string status)
     {
         var pedido = new Pedido(0, Data, cliente, status);
         pedidoRepository.Create(pedido);
@@ -51,7 +50,7 @@ public class GerenciamentoDePedidos
         }
     }
 
-    public List<Pedido> ListarPedidosPorCliente(string cliente)
+    public List<Pedido> ListarPedidosPorCliente(Cliente cliente)
     {
         return pedidoRepository.GetByCliente(cliente);
     }

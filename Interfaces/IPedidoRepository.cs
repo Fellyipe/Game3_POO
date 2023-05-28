@@ -12,7 +12,7 @@ namespace Gamificacao3.Interfaces
         void Create(Pedido pedido);
         void Update(Pedido pedido);
         void Delete(int id);
-        List<Pedido> GetByCliente(string cliente);
+        List<Pedido> GetByCliente(Cliente cliente);
         List<Pedido> GetByStatus(string status);
         List<Pedido> GetByData(DateTime data);
     }

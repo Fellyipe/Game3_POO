@@ -11,16 +11,33 @@ namespace Gamificacao3
 {
     private int _id;
     private DateTime _data;
-    private string _cliente;
+    private Cliente _cliente;
     private string _status;
     private List<ItemPedido> _itens;
+
+    public int Id{
+        get { return _id; }
+        set { _id = value; }
+    }
+
+    public DateTime Data{
+        get { return _data; }
+    }
+
+    public Cliente Cliente{
+        get { return _cliente; }
+    }
 
     public string Status {
         get { return _status; }
         set { _status = value; }
     }
 
-    public Pedido(int id, DateTime Data, string cliente, string status)
+    public List<ItemPedido> Itens {
+        get { return _itens; }
+    }
+
+    public Pedido(int id, DateTime Data, Cliente cliente, string status)
     {
         _id = id;
         _data = Data;

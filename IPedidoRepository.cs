@@ -1,5 +1,7 @@
 using Gamificacao3;
 using Gamificacao3.Interfaces;
+using MySql.Data;
+using MySql.Data.MySqlClient;
 
 public class PedidoRepository : IPedidoRepository
 {
@@ -12,11 +14,11 @@ public class PedidoRepository : IPedidoRepository
 
     public Pedido GetById(int id)
     {
-        using (var connection = new SqlConnection(connectionString))
+        using (var connection = new MySqlConnection(connectionString))
         {
             connection.Open();
             var query = "SELECT * FROM Pedidos WHERE Id = @Id";
-            using (var command = new SqlCommand(query, connection))
+            using (var command = new MySqlCommand(query, connection))
             {
                 command.Parameters.AddWithValue("@Id", id);
                 using (var reader = command.ExecuteReader())
@@ -25,7 +27,7 @@ public class PedidoRepository : IPedidoRepository
                     {
                         var pedidoId = reader.GetInt32(0);
                         var Data = reader.GetDateTime(1);
-                        var cliente = reader.GetString(2);
+                        var cliente = new Cliente(reader.GetString(2));
                         var status = reader.GetString(3);
 
                         return new Pedido(pedidoId, Data, cliente, status);
@@ -38,11 +40,11 @@ public class PedidoRepository : IPedidoRepository
 
     public void Create(Pedido pedido)
     {
-        using (var connection = new SqlConnection(connectionString))
+        using (var connection = new MySqlConnection(connectionString))
         {
             connection.Open();
             var query = "INSERT INTO Pedidos (Data, Cliente, Status) VALUES (@Data, @Cliente, @Status); SELECT SCOPE_IDENTITY();";
-            using (var command = new SqlCommand(query, connection))
+            using (var command = new MySqlCommand(query, connection))
             {
                 command.Parameters.AddWithValue("@Data", pedido.Data);
                 command.Parameters.AddWithValue("@Cliente", pedido.Cliente);
@@ -55,11 +57,11 @@ public class PedidoRepository : IPedidoRepository
 
     public void Update(Pedido pedido)
     {
-        using (var connection = new SqlConnection(connectionString))
+        using (var connection = new MySqlConnection(connectionString))
         {
             connection.Open();
             var query = "UPDATE Pedidos SET Data = @Data, Cliente = @Cliente, Status = @Status WHERE Id = @Id";
-            using (var command = new SqlCommand(query, connection))
+            using (var command = new MySqlCommand(query, connection))
             {
                 command.Parameters.AddWithValue("@Data", pedido.Data);
                 command.Parameters.AddWithValue("@Cliente", pedido.Cliente);
@@ -73,11 +75,11 @@ public class PedidoRepository : IPedidoRepository
 
     public void Delete(int id)
     {
-        using (var connection = new SqlConnection(connectionString))
+        using (var connection = new MySqlConnection(connectionString))
         {
             connection.Open();
             var query = "DELETE FROM Pedidos WHERE Id = @Id";
-            using (var command = new SqlCommand(query, connection))
+            using (var command = new MySqlCommand(query, connection))
             {
                 command.Parameters.AddWithValue("@Id", id);
                 command.ExecuteNonQuery();
@@ -85,14 +87,14 @@ public class PedidoRepository : IPedidoRepository
         }
     }
 
-    public List<Pedido> GetByCliente(string cliente)
+    public List<Pedido> GetByCliente(Cliente cliente)
     {
         var pedidos = new List<Pedido>();
-        using (var connection = new SqlConnection(connectionString))
+        using (var connection = new MySqlConnection(connectionString))
         {
             connection.Open();
             var query = "SELECT * FROM Pedidos WHERE Cliente = @Cliente";
-            using (var command = new SqlCommand(query, connection))
+            using (var command = new MySqlCommand(query, connection))
             {
                 command.Parameters.AddWithValue("@Cliente", cliente);
                 using (var reader = command.ExecuteReader())
@@ -114,11 +116,11 @@ public class PedidoRepository : IPedidoRepository
     public List<Pedido> GetByStatus(string status)
     {
         var pedidos = new List<Pedido>();
-        using (var connection = new SqlConnection(connectionString))
+        using (var connection = new MySqlConnection(connectionString))
         {
             connection.Open();
             var query = "SELECT * FROM Pedidos WHERE Status = @Status";
-            using (var command = new SqlCommand(query, connection))
+            using (var command = new MySqlCommand(query, connection))
             {
                 command.Parameters.AddWithValue("@Status", status);
                 using (var reader = command.ExecuteReader())
@@ -127,7 +129,7 @@ public class PedidoRepository : IPedidoRepository
                     {
                         var pedidoId = reader.GetInt32(0);
                         var Data = reader.GetDateTime(1);
-                        var cliente = reader.GetString(2);
+                        var cliente = new Cliente(reader.GetString(2));
 
                         pedidos.Add(new Pedido(pedidoId, Data, cliente, status));
                     }
@@ -140,11 +142,11 @@ public class PedidoRepository : IPedidoRepository
     public List<Pedido> GetByData(DateTime data)
     {
         var pedidos = new List<Pedido>();
-        using (var connection = new SqlConnection(connectionString))
+        using (var connection = new MySqlConnection(connectionString))
         {
             connection.Open();
             var query = "SELECT * FROM Pedidos WHERE Data = @Data";
-            using (var command = new SqlCommand(query, connection))
+            using (var command = new MySqlCommand(query, connection))
             {
                 command.Parameters.AddWithValue("@Data", data);
                 using (var reader = command.ExecuteReader())
@@ -152,7 +154,7 @@ public class PedidoRepository : IPedidoRepository
                     while (reader.Read())
                     {
                         var pedidoId = reader.GetInt32(0);
-                        var cliente = reader.GetString(2);
+                        var cliente = new Cliente(reader.GetString(2));
                         var status = reader.GetString(3);
 
                         pedidos.Add(new Pedido(pedidoId, data, cliente, status));
