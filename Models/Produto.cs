@@ -9,11 +9,11 @@ namespace Gamificacao3
 {
     public class Produto
     {
-        public int Id { get; private set; }
-        public string Nome { get; private set; }
-        public string Descricao { get; private set; }
-        public decimal Preco { get; private set; }
-        public int QuantidadeEmEstoque { get; private set; }
+        private int _id;
+        private string _nome;
+        private string _descricao;
+        private decimal _preco;
+        private int _quantidadeEmEstoque;
         public Produto(int id, string nome, string descricao, decimal preco, int quantidadeEmEstoque)
         {
             if (string.IsNullOrWhiteSpace(nome))
@@ -32,11 +32,11 @@ namespace Gamificacao3
             {
             throw new ArgumentException("Quantidade em estoque não pode ser negativa.");
             }
-            Id = id;
-            Nome = nome;
-            Descricao = descricao;
-            Preco = preco;
-            QuantidadeEmEstoque = quantidadeEmEstoque;
+            _id = id;
+            _nome = nome;
+            _descricao = descricao;
+            _preco = preco;
+            _quantidadeEmEstoque = quantidadeEmEstoque;
         }
     }
 }

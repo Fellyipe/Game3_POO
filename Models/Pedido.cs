@@ -8,13 +8,27 @@ using Gamificacao3;
 namespace Gamificacao3
 {
     public class Pedido
-    {
-        public int Id { get; set; }
-        public DateTime Data { get; set; }
-        public string? Cliente { get; set; }
-        public string? Status { get; set; }
-        public List<ItemPedido>? Itens { get; set; }
+{
+    private int _id;
+    private DateTime _data;
+    private string _cliente;
+    private string _status;
+    private List<ItemPedido> _itens;
+
+    public string Status {
+        get { return _status; }
+        set { _status = value; }
     }
+
+    public Pedido(int id, DateTime Data, string cliente, string status)
+    {
+        _id = id;
+        _data = Data;
+        _cliente = cliente;
+        _status = status;
+        _itens = new List<ItemPedido>();
+    }
+}
 
     
 }
