@@ -101,28 +101,34 @@ namespace Gamificacao3
                 var gerenciamentoDePedidos = new GerenciamentoDePedidos(pedidoRepository, itemPedidoRepository);
                 
                 // Criação de um novo produto
-                var produto1 = new Produto(0, "Notebook", "Notebook de última geração", 2500.00m, 10);
-
+                //var produto1 = new Produto(0, "Notebook", "Notebook de última geração", 2500.00m, 10);
+                //var produto2 = produtoRepository.GetById(17);
+                //var produto3 = new Produto(17, "Airpods", "Airpods cor branco", 120.00m, 7);
+                /*var produtos = produtoRepository.ListAll();
+                foreach(var elemento in produtos)
+                {
+                    Console.WriteLine("Id: " + elemento.Id + "; Nome: " + elemento.Nome + "; Descrição: " + elemento.Descricao + "; Preço: " + elemento.Preco + "; Quantidade em estoque: " + elemento.QuantidadeEmEstoque);
+                }*/
                 // Chamada do método para criar o produto no banco de dados
-                produtoRepository.Create(produto1);
+                //produtoRepository.Create(produto1);
 
                 // Criar um novo pedido
-                var cliente1 = new Cliente("Tadeu");
-                var pedido1 = gerenciamentoDePedidos.CriarPedido(DateTime.Now, cliente1, "Pendente");
+                //var cliente1 = new Cliente("Tadeu");
+                //var pedido1 = gerenciamentoDePedidos.CriarPedido(DateTime.Now, cliente1, "Pendente");
                 
                 // Adicionar itens a um pedido
-                gerenciamentoDePedidos.AdicionarItemPedido(pedido1.Id, produto1.Id, 2, produto1.Preco);
+                //gerenciamentoDePedidos.AdicionarItemPedido(pedido1.Id, produto1.Id, 2, produto1.Preco);
 
 
-                /*
-                gerenciamentoDePedidos.AdicionarItemPedido(1, 2, 1, 20.99m);
+                
+                //gerenciamentoDePedidos.AdicionarItemPedido(50, produto2.Id, 2, produto2.Preco);
                 
                 // Atualizar o status de um pedido
-                gerenciamentoDePedidos.AtualizarStatusPedido(1, "Pago");
+                //gerenciamentoDePedidos.AtualizarStatusPedido(49, "Pago");
                 
                 // Remover um pedido
-                gerenciamentoDePedidos.RemoverPedido(1);
-                
+                //gerenciamentoDePedidos.RemoverPedido(50);
+                /*
                 // Listar pedidos por cliente, status ou data
                 var pedidosCliente = gerenciamentoDePedidos.ListarPedidosPorCliente(cliente1);
                 var pedidosStatus = gerenciamentoDePedidos.ListarPedidosPorStatus("Pendente");
