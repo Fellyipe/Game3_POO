@@ -71,7 +71,7 @@ namespace Gamificacao3
         {
 
 
-            string connectionString = "server=localhost;database=nome_do_banco_de_dados;user=root;password=senha;";
+            string connectionString = "server=localhost;database=poo_game3;user=root;password=;";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
