@@ -101,7 +101,7 @@ namespace Gamificacao3
                 var gerenciamentoDePedidos = new GerenciamentoDePedidos(pedidoRepository, itemPedidoRepository);
                 
                 // Criação de um novo produto
-                //var produto1 = new Produto(0, "Notebook", "Notebook de última geração", 2500.00m, 10);
+                var produto1 = new Produto(0, "Isis", "Isis Yasmin", 1000000m, 1);
                 //var produto2 = produtoRepository.GetById(17);
                 //var produto3 = new Produto(17, "Airpods", "Airpods cor branco", 120.00m, 7);
                 /*var produtos = produtoRepository.ListAll();
@@ -110,7 +110,7 @@ namespace Gamificacao3
                     Console.WriteLine("Id: " + elemento.Id + "; Nome: " + elemento.Nome + "; Descrição: " + elemento.Descricao + "; Preço: " + elemento.Preco + "; Quantidade em estoque: " + elemento.QuantidadeEmEstoque);
                 }*/
                 // Chamada do método para criar o produto no banco de dados
-                //produtoRepository.Create(produto1);
+                produtoRepository.Create(produto1);
 
                 // Criar um novo pedido
                 //var cliente1 = new Cliente("Tadeu");
