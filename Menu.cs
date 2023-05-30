@@ -42,6 +42,8 @@ namespace Gamificacao3
             gerenciamentoDePedidos.AdicionarItemPedido(pedidoId, produtoId, quantidade, produto.Preco);
             var itemPedidoRepository = new ItemPedidoRepository(connectionString);
             var pedidoRepository = new PedidoRepository(connectionString);
+            public ItemPedido(int id, Produto? produto, int quantidade, decimal precoUnitario, Pedido? pedido)
+            var itemPedido = new ItemPedido(0, )
             pedidoRepository.AdicionarItem(pedidoId, itemPedidoRepository.GetById());
             Console.WriteLine("Item adicionado ao pedido com sucesso!");
 
