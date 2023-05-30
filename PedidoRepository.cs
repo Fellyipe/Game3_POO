@@ -100,7 +100,7 @@ public class PedidoRepository : IPedidoRepository
             var query = "SELECT * FROM tb_pedido WHERE Cliente = @Cliente";
             using (var command = new MySqlCommand(query, connection))
             {
-                command.Parameters.AddWithValue("@Cliente", cliente);
+                command.Parameters.AddWithValue("@Cliente", cliente.Nome);
                 using (var reader = command.ExecuteReader())
                 {
                     while (reader.Read())

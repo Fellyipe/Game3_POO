@@ -5,37 +5,46 @@ namespace Gamificacao3
 {
     public class Menu
     {
-        static void CriarNovoPedido(GerenciamentoDePedidos gerenciamentoDePedidos)
+
+        private readonly string connectionString;
+
+        public Menu(string connectionString)
+        {
+            this.connectionString = connectionString;
+        }
+        public void CriarNovoPedido(GerenciamentoDePedidos gerenciamentoDePedidos)
         {
             Console.WriteLine("===== CRIAR NOVO PEDIDO =====");
             Console.Write("Data do pedido: ");
             DateTime data = DateTime.Parse(Console.ReadLine());
             Console.Write("Cliente: ");
-            string cliente = Console.ReadLine();
+            var cliente = new Cliente(Console.ReadLine());
             Console.Write("Status do pedido: ");
-            string status = Console.ReadLine();
+            string ?status = Console.ReadLine();
 
             gerenciamentoDePedidos.CriarPedido(data, cliente, status);
 
             Console.WriteLine("Pedido criado com sucesso!");
         }
 
-        static void AdicionarItensAoPedido(GerenciamentoDePedidos gerenciamentoDePedidos)
+        public void AdicionarItensAoPedido(GerenciamentoDePedidos gerenciamentoDePedidos)
         {
             Console.WriteLine("===== ADICIONAR ITENS AO PEDIDO =====");
             Console.Write("ID do pedido: ");
             int pedidoId = int.Parse(Console.ReadLine());
             Console.Write("ID do produto: ");
             int produtoId = int.Parse(Console.ReadLine());
+            var produtoRepository = new ProdutoRepository(connectionString);
+            var produto = produtoRepository.GetById(produtoId);
             Console.Write("Quantidade: ");
             int quantidade = int.Parse(Console.ReadLine());
 
-            gerenciamentoDePedidos.AdicionarItemAoPedido(pedidoId, produtoId, quantidade);
+            gerenciamentoDePedidos.AdicionarItemPedido(pedidoId, produtoId, quantidade, produto.Preco);
 
             Console.WriteLine("Item adicionado ao pedido com sucesso!");
         }
 
-        static void AtualizarStatusPedido(GerenciamentoDePedidos gerenciamentoDePedidos)
+        public void AtualizarStatusPedido(GerenciamentoDePedidos gerenciamentoDePedidos)
         {
             Console.WriteLine("===== ATUALIZAR STATUS DO PEDIDO =====");
             Console.Write("ID do pedido: ");
@@ -43,12 +52,12 @@ namespace Gamificacao3
             Console.Write("Novo status: ");
             string novoStatus = Console.ReadLine();
 
-            gerenciamentoDePedidos.AtualizarStatusDoPedido(pedidoId, novoStatus);
+            gerenciamentoDePedidos.AtualizarStatusPedido(pedidoId, novoStatus);
 
             Console.WriteLine("Status do pedido atualizado com sucesso!");
         }
 
-        static void RemoverPedido(GerenciamentoDePedidos gerenciamentoDePedidos)
+        public void RemoverPedido(GerenciamentoDePedidos gerenciamentoDePedidos)
         {
             Console.WriteLine("===== REMOVER PEDIDO =====");
             Console.Write("ID do pedido: ");
@@ -59,7 +68,7 @@ namespace Gamificacao3
             Console.WriteLine("Pedido removido com sucesso!");
         }
 
-        static void ListarPedidos(GerenciamentoDePedidos gerenciamentoDePedidos)
+        public void ListarPedidos(GerenciamentoDePedidos gerenciamentoDePedidos)
         {
             Console.WriteLine("===== LISTAR PEDIDOS =====");
             Console.WriteLine("Escolha uma opção:");
@@ -75,12 +84,12 @@ namespace Gamificacao3
             {
                 case "1":
                     Console.Write("Cliente: ");
-                    string cliente = Console.ReadLine();
+                    var cliente = new Cliente(Console.ReadLine());
                     var pedidosPorCliente = gerenciamentoDePedidos.ListarPedidosPorCliente(cliente);
                     Console.WriteLine("Pedidos encontrados:");
                     foreach (var pedido in pedidosPorCliente)
                     {
-                        Console.WriteLine(pedido);
+                        Console.WriteLine("Cliente: " + pedido?.Cliente?.Nome + "; Data: " + pedido?.Data + "; Status: " + pedido?.Status);
                     }
                     break;
                 case "2":
@@ -90,7 +99,7 @@ namespace Gamificacao3
                     Console.WriteLine("Pedidos encontrados:");
                     foreach (var pedido in pedidosPorStatus)
                     {
-                        Console.WriteLine(pedido);
+                        Console.WriteLine("Cliente: " + pedido.Cliente.Nome + "; Data: " + pedido.Data + "; Status: " + pedido.Status);
                     }
                     break;
                 case "3":
@@ -100,7 +109,7 @@ namespace Gamificacao3
                     Console.WriteLine("Pedidos encontrados:");
                     foreach (var pedido in pedidosPorData)
                     {
-                        Console.WriteLine(pedido);
+                        Console.WriteLine("Cliente: " + pedido.Cliente.Nome + "; Data: " + pedido.Data + "; Status: " + pedido.Status);
                     }
                     break;
                 case "4":
@@ -112,7 +121,7 @@ namespace Gamificacao3
             }
         }
 
-        static void CalcularValorTotalPedido(GerenciamentoDePedidos gerenciamentoDePedidos)
+        public void CalcularValorTotalPedido(GerenciamentoDePedidos gerenciamentoDePedidos)
         {
             Console.WriteLine("===== CALCULAR VALOR TOTAL DO PEDIDO =====");
             Console.Write("ID do pedido: ");
@@ -123,7 +132,7 @@ namespace Gamificacao3
             Console.WriteLine($"Valor total do pedido: R${valorTotal:F2}");
         }
 
-        static void AcessoAdministrador(GerenciamentoDePedidos gerenciamentoDePedidos, ProdutoRepository produtoRepository)
+        public void AcessoAdministrador(GerenciamentoDePedidos gerenciamentoDePedidos, ProdutoRepository produtoRepository)
         {
             bool sair = false;
 
@@ -172,7 +181,7 @@ namespace Gamificacao3
             }
         }
 
-        static void CriarNovoProduto(ProdutoRepository produtoRepository)
+        public void CriarNovoProduto(ProdutoRepository produtoRepository)
         {
             Console.WriteLine("===== CRIAR NOVO PRODUTO =====");
             Console.Write("Nome do produto: ");
@@ -190,7 +199,7 @@ namespace Gamificacao3
             Console.WriteLine("Produto criado com sucesso!");
         }
 
-        static void AtualizarProduto(ProdutoRepository produtoRepository)
+        public void AtualizarProduto(ProdutoRepository produtoRepository)
         {
             Console.WriteLine("===== ATUALIZAR PRODUTO =====");
             Console.Write("ID do produto: ");
@@ -223,7 +232,7 @@ namespace Gamificacao3
             }
         }
 
-        static void RemoverProduto(ProdutoRepository produtoRepository)
+        public void RemoverProduto(ProdutoRepository produtoRepository)
         {
             Console.WriteLine("===== REMOVER PRODUTO =====");
             Console.Write("ID do produto: ");
@@ -234,7 +243,7 @@ namespace Gamificacao3
             Console.WriteLine("Produto removido com sucesso!");
         }
 
-        static void ListarTodosProdutos(ProdutoRepository produtoRepository)
+        public void ListarTodosProdutos(ProdutoRepository produtoRepository)
         {
             Console.WriteLine("===== LISTAR TODOS OS PRODUTOS =====");
             var produtos = produtoRepository.ListAll();

@@ -99,6 +99,7 @@ namespace Gamificacao3
                 var itemPedidoRepository = new ItemPedidoRepository(connectionString);
                 var produtoRepository = new ProdutoRepository(connectionString);
                 var gerenciamentoDePedidos = new GerenciamentoDePedidos(pedidoRepository, itemPedidoRepository);
+                var menu = new Menu(connectionString);
 
                 // Criação de um novo produto
                 var produto1 = new Produto(0, "Isis", "Isis Yasmin", 1000000m, 1);
@@ -161,31 +162,31 @@ namespace Gamificacao3
             {
                 case "1":
                     // Criar um novo pedido
-                    CriarNovoPedido(gerenciamentoDePedidos);
+                    menu.CriarNovoPedido(gerenciamentoDePedidos);
                     break;
                 case "2":
                     // Adicionar itens a um pedido
-                    AdicionarItensAoPedido(gerenciamentoDePedidos);
+                    menu.AdicionarItensAoPedido(gerenciamentoDePedidos);
                     break;
                 case "3":
                     // Atualizar o status de um pedido
-                    AtualizarStatusPedido(gerenciamentoDePedidos);
+                    menu.AtualizarStatusPedido(gerenciamentoDePedidos);
                     break;
                 case "4":
                     // Remover um pedido
-                    RemoverPedido(gerenciamentoDePedidos);
+                    menu.RemoverPedido(gerenciamentoDePedidos);
                     break;
                 case "5":
                     // Listar pedidos por cliente, status ou data
-                    ListarPedidos(gerenciamentoDePedidos);
+                    menu.ListarPedidos(gerenciamentoDePedidos);
                     break;
                 case "6":
                     // Calcular o valor total de um pedido
-                    CalcularValorTotalPedido(gerenciamentoDePedidos);
+                    menu.CalcularValorTotalPedido(gerenciamentoDePedidos);
                     break;
                 case "7":
                     // Acesso administrador
-                    AcessoAdministrador(gerenciamentoDePedidos, produtoRepository);
+                    menu.AcessoAdministrador(gerenciamentoDePedidos, produtoRepository);
                     break;
                 case "0":
                     // Sair
