@@ -22,10 +22,12 @@ namespace Gamificacao3
 
     public DateTime Data{
         get { return _data; }
+        set { _data = value;}
     }
 
     public Cliente? Cliente{
         get { return _cliente; }
+        set { _cliente = value;}
     }
 
     public string Status {

@@ -21,9 +21,11 @@ namespace Gamificacao3
 
         public int Quantidade{
             get { return _quantidade; }
+            set { _quantidade = value;}
         }
         public decimal PrecoUnitario{
             get { return _precoUnitario; }
+            set { _precoUnitario = value;}
         }
 
         public Pedido? Pedido{

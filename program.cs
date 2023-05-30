@@ -99,7 +99,7 @@ namespace Gamificacao3
                 var itemPedidoRepository = new ItemPedidoRepository(connectionString);
                 var produtoRepository = new ProdutoRepository(connectionString);
                 var gerenciamentoDePedidos = new GerenciamentoDePedidos(pedidoRepository, itemPedidoRepository);
-                
+
                 // Criação de um novo produto
                 var produto1 = new Produto(0, "Isis", "Isis Yasmin", 1000000m, 1);
                 //var produto2 = produtoRepository.GetById(17);
@@ -138,7 +138,83 @@ namespace Gamificacao3
                 var valorTotalPedido = gerenciamentoDePedidos.CalcularValorTotalPedido(1);
                 */
                 
-                
+                bool sair = false;
+
+                while (!sair)
+        {
+            Console.WriteLine("====== MENU ======");
+            Console.WriteLine("1. Criar um novo pedido");
+            Console.WriteLine("2. Adicionar itens a um pedido");
+            Console.WriteLine("3. Atualizar o status de um pedido");
+            Console.WriteLine("4. Remover um pedido");
+            Console.WriteLine("5. Listar pedidos por cliente, status ou data");
+            Console.WriteLine("6. Calcular o valor total de um pedido");
+            Console.WriteLine("7. Acesso administrador (CRUD de pedidos, itens de pedido e produtos)");
+            Console.WriteLine("0. Sair");
+            Console.WriteLine("==================");
+            Console.Write("Escolha uma opção: ");
+
+            string opcao = Console.ReadLine();
+            Console.WriteLine();
+
+            switch (opcao)
+            {
+                case "1":
+                    // Criar um novo pedido
+                    CriarNovoPedido(gerenciamentoDePedidos);
+                    break;
+                case "2":
+                    // Adicionar itens a um pedido
+                    AdicionarItensAoPedido(gerenciamentoDePedidos);
+                    break;
+                case "3":
+                    // Atualizar o status de um pedido
+                    AtualizarStatusPedido(gerenciamentoDePedidos);
+                    break;
+                case "4":
+                    // Remover um pedido
+                    RemoverPedido(gerenciamentoDePedidos);
+                    break;
+                case "5":
+                    // Listar pedidos por cliente, status ou data
+                    ListarPedidos(gerenciamentoDePedidos);
+                    break;
+                case "6":
+                    // Calcular o valor total de um pedido
+                    CalcularValorTotalPedido(gerenciamentoDePedidos);
+                    break;
+                case "7":
+                    // Acesso administrador
+                    AcessoAdministrador(gerenciamentoDePedidos, produtoRepository);
+                    break;
+                case "0":
+                    // Sair
+                    sair = true;
+                    break;
+                default:
+                    Console.WriteLine("Opção inválida. Por favor, escolha uma opção válida.");
+                    break;
+            }
+
+
+
+
+
+
+            
+
+            Console.WriteLine();
+        }
+
+
+
+
+
+
+
+
+
+
                 connection.Close();
                 Console.WriteLine("Conexão com o banco de dados encerrada.");                
                 
