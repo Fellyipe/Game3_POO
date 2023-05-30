@@ -76,6 +76,7 @@ public class GerenciamentoDePedidos
             foreach (var itemPedido in pedido.Itens)
             {
                 valorTotal += itemPedido.Quantidade * itemPedido.PrecoUnitario;
+                Console.WriteLine(itemPedido);
             }
             return valorTotal;
         }
