@@ -15,5 +15,6 @@ namespace Gamificacao3.Interfaces
         List<Pedido> GetByCliente(Cliente cliente);
         List<Pedido> GetByStatus(string status);
         List<Pedido> GetByData(DateTime data);
+        void AdicionarItem(int pedidoId, ItemPedido itemPedido);
     }
 }

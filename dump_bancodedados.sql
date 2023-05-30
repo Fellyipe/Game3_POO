@@ -12,7 +12,7 @@ CREATE TABLE tb_produto (
 
 CREATE TABLE tb_pedido (
     Id INT PRIMARY KEY AUTO_INCREMENT,
-    Data DATETIME NOT NULL,
+    Data DATE NOT NULL,
     Cliente VARCHAR(100) NOT NULL,
     Status VARCHAR(20) NOT NULL
 );

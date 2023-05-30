@@ -49,8 +49,6 @@ public class PedidoRepository : IPedidoRepository
                 command.Parameters.AddWithValue("@Data", pedido?.Data);
                 command.Parameters.AddWithValue("@Cliente", pedido?.Cliente?.Nome);
                 command.Parameters.AddWithValue("@Status", pedido?.Status);
-
-
                 if (pedido != null)
                 {
                     pedido.Id = Convert.ToInt32(command.ExecuteScalar());
@@ -168,4 +166,18 @@ public class PedidoRepository : IPedidoRepository
         }
         return pedidos;
     }
+    public void AdicionarItem(int pedidoId, ItemPedido itemPedido)
+    {
+        var pedido = GetById(pedidoId);
+        if (pedido != null)
+        {
+            pedido.Itens.Add(itemPedido);
+        }
+        else
+        {
+            Console.WriteLine("Pedido não encontrado!");
+        }
+    }
+
+
 }

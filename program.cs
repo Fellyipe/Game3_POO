@@ -102,7 +102,7 @@ namespace Gamificacao3
                 var menu = new Menu(connectionString);
 
                 // Criação de um novo produto
-                var produto1 = new Produto(0, "Isis", "Isis Yasmin", 1000000m, 1);
+                //var produto1 = new Produto(0, "Isis", "Isis Yasmin", 1000000m, 1);
                 //var produto2 = produtoRepository.GetById(17);
                 //var produto3 = new Produto(17, "Airpods", "Airpods cor branco", 120.00m, 7);
                 /*var produtos = produtoRepository.ListAll();
@@ -111,7 +111,7 @@ namespace Gamificacao3
                     Console.WriteLine("Id: " + elemento.Id + "; Nome: " + elemento.Nome + "; Descrição: " + elemento.Descricao + "; Preço: " + elemento.Preco + "; Quantidade em estoque: " + elemento.QuantidadeEmEstoque);
                 }*/
                 // Chamada do método para criar o produto no banco de dados
-                produtoRepository.Create(produto1);
+                //produtoRepository.Create(produto1);
 
                 // Criar um novo pedido
                 //var cliente1 = new Cliente("Tadeu");
@@ -142,70 +142,62 @@ namespace Gamificacao3
                 bool sair = false;
 
                 while (!sair)
-        {
-            Console.WriteLine("====== MENU ======");
-            Console.WriteLine("1. Criar um novo pedido");
-            Console.WriteLine("2. Adicionar itens a um pedido");
-            Console.WriteLine("3. Atualizar o status de um pedido");
-            Console.WriteLine("4. Remover um pedido");
-            Console.WriteLine("5. Listar pedidos por cliente, status ou data");
-            Console.WriteLine("6. Calcular o valor total de um pedido");
-            Console.WriteLine("7. Acesso administrador (CRUD de pedidos, itens de pedido e produtos)");
-            Console.WriteLine("0. Sair");
-            Console.WriteLine("==================");
-            Console.Write("Escolha uma opção: ");
+                {
+                    Console.WriteLine("====== MENU ======");
+                    Console.WriteLine("1. Criar um novo pedido");
+                    Console.WriteLine("2. Adicionar itens a um pedido");
+                    Console.WriteLine("3. Atualizar o status de um pedido");
+                    Console.WriteLine("4. Remover um pedido");
+                    Console.WriteLine("5. Listar pedidos por cliente, status ou data");
+                    Console.WriteLine("6. Calcular o valor total de um pedido");
+                    Console.WriteLine("7. Acesso administrador (CRUD de produtos)");
+                    Console.WriteLine("0. Sair");
+                    Console.WriteLine("==================");
+                    Console.Write("Escolha uma opção: ");
 
-            string opcao = Console.ReadLine();
-            Console.WriteLine();
+                    string opcao = Console.ReadLine();
+                    Console.WriteLine();
 
-            switch (opcao)
-            {
-                case "1":
-                    // Criar um novo pedido
-                    menu.CriarNovoPedido(gerenciamentoDePedidos);
-                    break;
-                case "2":
-                    // Adicionar itens a um pedido
-                    menu.AdicionarItensAoPedido(gerenciamentoDePedidos);
-                    break;
-                case "3":
-                    // Atualizar o status de um pedido
-                    menu.AtualizarStatusPedido(gerenciamentoDePedidos);
-                    break;
-                case "4":
-                    // Remover um pedido
-                    menu.RemoverPedido(gerenciamentoDePedidos);
-                    break;
-                case "5":
-                    // Listar pedidos por cliente, status ou data
-                    menu.ListarPedidos(gerenciamentoDePedidos);
-                    break;
-                case "6":
-                    // Calcular o valor total de um pedido
-                    menu.CalcularValorTotalPedido(gerenciamentoDePedidos);
-                    break;
-                case "7":
-                    // Acesso administrador
-                    menu.AcessoAdministrador(gerenciamentoDePedidos, produtoRepository);
-                    break;
-                case "0":
-                    // Sair
-                    sair = true;
-                    break;
-                default:
-                    Console.WriteLine("Opção inválida. Por favor, escolha uma opção válida.");
-                    break;
-            }
-
-
-
-
-
-
-            
-
-            Console.WriteLine();
-        }
+                    switch (opcao)
+                    {
+                        case "1":
+                            // Criar um novo pedido
+                            menu.CriarNovoPedido(gerenciamentoDePedidos);
+                            break;
+                        case "2":
+                            // Adicionar itens a um pedido
+                            menu.AdicionarItensAoPedido(gerenciamentoDePedidos);
+                            break;
+                        case "3":
+                            // Atualizar o status de um pedido
+                            menu.AtualizarStatusPedido(gerenciamentoDePedidos);
+                            break;
+                        case "4":
+                            // Remover um pedido
+                            menu.RemoverPedido(gerenciamentoDePedidos);
+                            break;
+                        case "5":
+                            // Listar pedidos por cliente, status ou data
+                            menu.ListarPedidos(gerenciamentoDePedidos);
+                            break;
+                        case "6":
+                            // Calcular o valor total de um pedido
+                            menu.CalcularValorTotalPedido(gerenciamentoDePedidos);
+                            break;
+                        case "7":
+                            // Acesso administrador
+                            menu.AcessoAdministrador(gerenciamentoDePedidos, produtoRepository);
+                            break;
+                        case "0":
+                            // Sair
+                            sair = true;
+                            break;
+                        default:
+                            Console.WriteLine("Opção inválida. Por favor, escolha uma opção válida.");
+                            break;
+                    }
+                    Console.WriteLine();
+                }
 
 
 
