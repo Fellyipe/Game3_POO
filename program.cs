@@ -75,8 +75,6 @@ namespace Gamificacao3
                 connection.Open();
                 Console.WriteLine("Conexão com o banco de dados estabelecida com sucesso.");
 
-                Console.WriteLine("Hello World!");
-
                 string query = "SELECT SYSDATE() AS SYSDATE";
                 MySqlCommand comando = new MySqlCommand(query, connection);
 
