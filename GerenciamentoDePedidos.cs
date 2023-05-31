@@ -74,13 +74,10 @@ public class GerenciamentoDePedidos
         var itensPedido = itemPedidoRepository.GetByPedidoId(pedidoId);
         if (pedido != null)
         {
-            Console.WriteLine("Teste");
             decimal valorTotal = 0;
             foreach (var itemPedido in itensPedido)
             {
-                Console.WriteLine("Teste");
                 valorTotal += itemPedido.Quantidade * itemPedido.PrecoUnitario;
-                Console.WriteLine(itemPedido);
             }
             return valorTotal;
         }

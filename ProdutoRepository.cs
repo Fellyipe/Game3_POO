@@ -27,7 +27,7 @@ public class ProdutoRepository : IProdutoRepository
                 command.Parameters.AddWithValue("@QuantidadeEmEstoque", produto.QuantidadeEmEstoque);
 
                 produto.Id = Convert.ToInt32(command.ExecuteScalar());
-                command.ExecuteNonQuery();
+                //command.ExecuteNonQuery();
             }
         }
     }

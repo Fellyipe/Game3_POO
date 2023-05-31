@@ -8,9 +8,6 @@ using System.Data.SqlClient;
 using MySql.Data;
 using MySql.Data.MySqlClient;
 
-// Entidades
-
-
 // Implementação do repositório utilizando ADO.NET
 
 /*
@@ -78,8 +75,6 @@ namespace Gamificacao3
                 connection.Open();
                 Console.WriteLine("Conexão com o banco de dados estabelecida com sucesso.");
 
-                // Realize as operações desejadas no banco de dados aqui
-
                 Console.WriteLine("Hello World!");
 
                 string query = "SELECT SYSDATE() AS SYSDATE";
@@ -94,50 +89,11 @@ namespace Gamificacao3
                     }
                 }
 
-                
                 var pedidoRepository = new PedidoRepository(connectionString);
                 var itemPedidoRepository = new ItemPedidoRepository(connectionString);
                 var produtoRepository = new ProdutoRepository(connectionString);
                 var gerenciamentoDePedidos = new GerenciamentoDePedidos(pedidoRepository, itemPedidoRepository);
                 var menu = new Menu(connectionString);
-
-                // Criação de um novo produto
-                //var produto1 = new Produto(0, "Isis", "Isis Yasmin", 1000000m, 1);
-                //var produto2 = produtoRepository.GetById(17);
-                //var produto3 = new Produto(17, "Airpods", "Airpods cor branco", 120.00m, 7);
-                /*var produtos = produtoRepository.ListAll();
-                foreach(var elemento in produtos)
-                {
-                    Console.WriteLine("Id: " + elemento.Id + "; Nome: " + elemento.Nome + "; Descrição: " + elemento.Descricao + "; Preço: " + elemento.Preco + "; Quantidade em estoque: " + elemento.QuantidadeEmEstoque);
-                }*/
-                // Chamada do método para criar o produto no banco de dados
-                //produtoRepository.Create(produto1);
-
-                // Criar um novo pedido
-                //var cliente1 = new Cliente("Tadeu");
-                //var pedido1 = gerenciamentoDePedidos.CriarPedido(DateTime.Now, cliente1, "Pendente");
-                
-                // Adicionar itens a um pedido
-                //gerenciamentoDePedidos.AdicionarItemPedido(pedido1.Id, produto1.Id, 2, produto1.Preco);
-
-
-                
-                //gerenciamentoDePedidos.AdicionarItemPedido(50, produto2.Id, 2, produto2.Preco);
-                
-                // Atualizar o status de um pedido
-                //gerenciamentoDePedidos.AtualizarStatusPedido(49, "Pago");
-                
-                // Remover um pedido
-                //gerenciamentoDePedidos.RemoverPedido(50);
-                /*
-                // Listar pedidos por cliente, status ou data
-                var pedidosCliente = gerenciamentoDePedidos.ListarPedidosPorCliente(cliente1);
-                var pedidosStatus = gerenciamentoDePedidos.ListarPedidosPorStatus("Pendente");
-                var pedidosData = gerenciamentoDePedidos.ListarPedidosPorData(DateTime.Now);
-                
-                // Calcular o valor total de um pedido
-                var valorTotalPedido = gerenciamentoDePedidos.CalcularValorTotalPedido(1);
-                */
                 
                 bool sair = false;
 
@@ -161,35 +117,27 @@ namespace Gamificacao3
                     switch (opcao)
                     {
                         case "1":
-                            // Criar um novo pedido
                             menu.CriarNovoPedido(gerenciamentoDePedidos);
                             break;
                         case "2":
-                            // Adicionar itens a um pedido
                             menu.AdicionarItensAoPedido(gerenciamentoDePedidos);
                             break;
                         case "3":
-                            // Atualizar o status de um pedido
                             menu.AtualizarStatusPedido(gerenciamentoDePedidos);
                             break;
                         case "4":
-                            // Remover um pedido
                             menu.RemoverPedido(gerenciamentoDePedidos);
                             break;
                         case "5":
-                            // Listar pedidos por cliente, status ou data
                             menu.ListarPedidos(gerenciamentoDePedidos);
                             break;
                         case "6":
-                            // Calcular o valor total de um pedido
                             menu.CalcularValorTotalPedido(gerenciamentoDePedidos);
                             break;
                         case "7":
-                            // Acesso administrador
-                            menu.AcessoAdministrador(gerenciamentoDePedidos, produtoRepository);
+                            menu.AcessoAdministrador(gerenciamentoDePedidos, produtoRepository, pedidoRepository, itemPedidoRepository);
                             break;
                         case "0":
-                            // Sair
                             sair = true;
                             break;
                         default:
@@ -198,19 +146,8 @@ namespace Gamificacao3
                     }
                     Console.WriteLine();
                 }
-
-
-
-
-
-
-
-
-
-
                 connection.Close();
                 Console.WriteLine("Conexão com o banco de dados encerrada.");                
-                
             }
             catch (Exception ex)
             {

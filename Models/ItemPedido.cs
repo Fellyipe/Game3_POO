@@ -17,6 +17,7 @@ namespace Gamificacao3
 
         public Produto? Produto{
             get { return _produto; }
+            set { _produto = value; }
         }
 
         public int Quantidade{
@@ -30,6 +31,7 @@ namespace Gamificacao3
 
         public Pedido? Pedido{
             get { return _pedido; }
+            set { _pedido = value; }
         }
 
         public ItemPedido(int id, Produto? produto, int quantidade, decimal precoUnitario, Pedido? pedido)

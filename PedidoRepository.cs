@@ -166,19 +166,36 @@ public class PedidoRepository : IPedidoRepository
         }
         return pedidos;
     }
-    /*public void AdicionarItem(int pedidoId, ItemPedido itemPedido)
+    
+    public IEnumerable<Pedido> ListAll()
     {
-        var pedido = GetById(pedidoId);
-        if (pedido != null)
+        var pedidos = new List<Pedido>();
+
+        using (var connection = new MySqlConnection(connectionString))
         {
-            pedido.Itens.Add(itemPedido);
+            connection.Open();
+            var query = "SELECT * FROM tb_pedido";
+            using (var command = new MySqlCommand(query, connection))
+            {
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var pedidoId = reader.GetInt32(0);
+                        var Data = reader.GetDateTime(1);
+                        var cliente = new Cliente(reader.GetString(2));
+                        var status = reader.GetString(3);
+
+                        var pedido = new Pedido(pedidoId, Data, cliente, status);
+                        pedidos.Add(pedido);
+                    }
+                }
+            }
         }
-        else
-        {
-            Console.WriteLine("Pedido não encontrado!");
-        }
+
+        return pedidos;
     }
-    */
+
 
 
 }
