@@ -166,7 +166,7 @@ public class PedidoRepository : IPedidoRepository
         }
         return pedidos;
     }
-    public void AdicionarItem(int pedidoId, ItemPedido itemPedido)
+    /*public void AdicionarItem(int pedidoId, ItemPedido itemPedido)
     {
         var pedido = GetById(pedidoId);
         if (pedido != null)
@@ -178,6 +178,7 @@ public class PedidoRepository : IPedidoRepository
             Console.WriteLine("Pedido não encontrado!");
         }
     }
+    */
 
 
 }

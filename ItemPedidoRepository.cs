@@ -98,4 +98,45 @@ public class ItemPedidoRepository : IItemPedidoRepository
             }
         }
     }
+
+    public List<ItemPedido> GetByPedidoId(int pedidoId)
+    {
+        var itensPedido = new List<ItemPedido>();
+
+        using (var connection = new MySqlConnection(connectionString))
+        {
+            connection.Open();
+            var query = "SELECT * FROM tb_itempedido WHERE tb_pedidoId = @tb_pedidoId";
+            using (var command = new MySqlCommand(query, connection))
+            {
+                command.Parameters.AddWithValue("@tb_pedidoId", pedidoId);
+
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var itemPedidoId = reader.GetInt32(0);
+                        var produtoId = reader.GetInt32(1);
+                        var quantidade = reader.GetInt32(2);
+                        var precoUnitario = reader.GetDecimal(3);
+
+                        // Obter o produto relacionado ao item do pedido
+                        var produtoRepository = new ProdutoRepository("server=localhost;database=poo_game3;user=root;password=;");
+                        var produto = produtoRepository.GetById(produtoId);
+                        var pedidoRepository = new PedidoRepository("server=localhost;database=poo_game3;user=root;password=;");
+                        var pedido = pedidoRepository.GetById(pedidoId);
+
+                        // Criar o objeto ItemPedido
+                        var itemPedido = new ItemPedido(itemPedidoId, produto, quantidade, precoUnitario, pedido);
+
+                        // Adicionar o ItemPedido à lista
+                        itensPedido.Add(itemPedido);
+                    }
+                }
+            }
+        }
+
+        return itensPedido;
+    }
+
 }

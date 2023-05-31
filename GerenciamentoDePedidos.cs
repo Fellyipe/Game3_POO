@@ -70,11 +70,15 @@ public class GerenciamentoDePedidos
     public decimal CalcularValorTotalPedido(int pedidoId)
     {
         var pedido = pedidoRepository.GetById(pedidoId);
+        var itemPedidoRepository = new ItemPedidoRepository("server=localhost;database=poo_game3;user=root;password=;");
+        var itensPedido = itemPedidoRepository.GetByPedidoId(pedidoId);
         if (pedido != null)
         {
+            Console.WriteLine("Teste");
             decimal valorTotal = 0;
-            foreach (var itemPedido in pedido.Itens)
+            foreach (var itemPedido in itensPedido)
             {
+                Console.WriteLine("Teste");
                 valorTotal += itemPedido.Quantidade * itemPedido.PrecoUnitario;
                 Console.WriteLine(itemPedido);
             }

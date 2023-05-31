@@ -12,5 +12,6 @@ namespace Gamificacao3.Interfaces
         void Create(ItemPedido itemPedido);
         void Update(ItemPedido itemPedido);
         void Delete(int id);
+        List<ItemPedido> GetByPedidoId(int pedidoId);
     }
 }

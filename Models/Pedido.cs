@@ -13,7 +13,7 @@ namespace Gamificacao3
     private DateTime _data;
     private Cliente? _cliente;
     private string _status;
-    private List<ItemPedido> _itens;
+    //private List<ItemPedido> _itens;
 
     public int Id{
         get { return _id; }
@@ -35,9 +35,9 @@ namespace Gamificacao3
         set { _status = value; }
     }
 
-    public List<ItemPedido> Itens {
+    /*public List<ItemPedido> Itens {
         get { return _itens; }
-    }
+    }*/
 
     public Pedido(int id, DateTime Data, Cliente? cliente, string status)
     {
@@ -45,7 +45,7 @@ namespace Gamificacao3
         _data = Data;
         _cliente = cliente;
         _status = status;
-        _itens = new List<ItemPedido>();
+        //_itens = new List<ItemPedido>();
     }
 }
 
