@@ -106,7 +106,7 @@ namespace Gamificacao3
                     Console.WriteLine("4. Remover um pedido");
                     Console.WriteLine("5. Listar pedidos por cliente, status ou data");
                     Console.WriteLine("6. Calcular o valor total de um pedido");
-                    Console.WriteLine("7. Acesso administrador (CRUD de produtos)");
+                    Console.WriteLine("7. Acesso administrador (CRUD de produtos, pedidos e item pedidos)");
                     Console.WriteLine("0. Sair");
                     Console.WriteLine("==================");
                     Console.Write("Escolha uma opção: ");
